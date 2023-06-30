@@ -35,15 +35,15 @@
     </style>
   </head>
   <body>
-    <h1> This is created by Prajwal </h1>
-    <h2> Trainer Name: PRAJWAL J </h2>
+    <h1> This is created by </h1>
+    <h2> PRAJWAL J </h2>
 
     <br>
     <br>
     <h2> App Status  : Up & Running !!! </h2>
-    <h2> Image       : prajwal1691/IMAGE_NAME </h2>
+    <h2> Current Image       : prajwal1691/IMAGE_NAME </h2>
     <br>
-    <div class="color-box blue"></div>
+    <div class="color-box yellow"></div>
     <div class="color-box red"></div>
     <div class="color-box green"></div>            
     <div class="color-box purple"></div>
