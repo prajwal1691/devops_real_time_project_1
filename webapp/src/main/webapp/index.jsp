@@ -40,7 +40,7 @@
 
     <br>
     <br>
-    <h2> App Status  : Up & Running Now !!! </h2>
+    <h2> App Status  : Up & Running !!! </h2>
     <h2> Current Image       : prajwal1691/IMAGE_NAME </h2>
     <br>
     <div class="color-box blue"></div>
