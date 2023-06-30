@@ -43,7 +43,7 @@
     <h2> App Status  : Up & Running !!! </h2>
     <h2> Current Image       : prajwal1691/IMAGE_NAME </h2>
     <br>
-    <div class="color-box blue"></div>
+    <div class="color-box yellow"></div>
     <div class="color-box red"></div>
     <div class="color-box green"></div>            
     <div class="color-box purple"></div>
