@@ -1,7 +1,7 @@
 ---
 - name: DEPLOYMENT ON EKS
   hosts: tag_eks_master_server
-  remote_user: root
+  remote_user: ubuntu
   tasks:  
     - name: CREATE PLAYBOOKS DIR ON EKS CLUSTER
       file:

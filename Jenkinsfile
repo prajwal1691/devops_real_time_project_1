@@ -92,5 +92,12 @@ pipeline {
                   ansiblePlaybook credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'aws_ec2.yml', playbook: 'playbooks/push_dockerhub.yml'
             }
         }
+
+    stage('DEPLOYMENT ON EKS') {
+            steps {
+                ansiblePlaybook credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'aws_ec2.yml', playbook: 'playbooks/create_pod_on_eks.yml' \
+                    --extra-vars "JOB_NAME=$JOB_NAME"'
+            }            
+        } 
   }
 }
