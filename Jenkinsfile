@@ -93,10 +93,17 @@ pipeline {
             }
         }
 
+    stage('Change Deploy Tags') {
+      steps {
+        sh """
+          sed -i 's/JOB_NAME/${JOB_NAME}/g' playbooks/create_pod_on_eks.yml
+          """
+      }
+    }
+
     stage('DEPLOYMENT ON EKS') {
             steps {
-                ansiblePlaybook credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'aws_ec2.yml', playbook: 'playbooks/create_pod_on_eks.yml' \
-                    --extra-vars "JOB_NAME=$JOB_NAME"'
+                ansiblePlaybook credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'aws_ec2.yml', playbook: 'playbooks/create_pod_on_eks.yml'
             }            
         } 
   }
