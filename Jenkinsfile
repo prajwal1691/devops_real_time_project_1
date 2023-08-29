@@ -6,7 +6,7 @@ pipeline {
     NEXUS_URL = "65.0.110.219:8081"
     DOCKER_HOSTED = "65.0.110.219:8083"
     AWS_DEFAULT_REGION = 'ap-south-1'
-    NEXUS_PASSWORD = (credentialsId: 'nexus_pass')
+    NEXUS_PASSWORD = "(credentialsId: 'nexus_pass')"
   }
 
   stages {
@@ -79,11 +79,14 @@ pipeline {
 
     stage('MODIFIED PUSH TAG'){
       steps{
-        sh '''
+        script {
+                  def nexusCreds = credentials('nexus_pass')
+                  sh '''
                    sed -i 's/DOCKER_HOSTED/${DOCKER_HOSTED}/g' playbooks/push_dockerhub.yml
                    sed -i 's/VERSION/${VERSION}/g' playbooks/push_dockerhub.yml
                    sed -i 's/NEXUS_PASSWORD/${NEXUS_PASSWORD}/g' playbooks/push_dockerhub.yml
                    '''
+        }
       }
     }
 
