@@ -76,6 +76,15 @@ pipeline {
                   }
     }
 
+    stage('Change Push Tags') {
+      steps {
+        sh '''
+          sed -i 's/DOCKER_HOSTED/${DOCKER_HOSTED}/g' playbooks/push_dockerhub.yml
+          sed -i 's/VERSION/${VERSION}/g' playbooks/push_dockerhub.yml
+        '''
+      }
+    }
+
     stage('PUSH IMAGE ON DOCKERHUB') {  
             steps {
                   ansiblePlaybook credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'aws_ec2.yml', playbook: 'playbooks/push_dockerhub.yml'
