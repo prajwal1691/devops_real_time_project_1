@@ -7,12 +7,12 @@
     - name: TAG IMAGE WITH BUILD ID & LATEST
       shell: |
         cd /opt/docker
-        docker build -t {{ DOCKER_HOSTED }}/springapp:{{ VERSION }} .
+        docker build -t DOCKER_HOSTED/springapp:VERSION .
 
     - name: LOGIN DOCKERHUB & PUSH IMAGE ON REGISTRY
       shell: |        
-        docker login -u admin -p {{ NEXUS_PASSWORD }} ${DOCKER_HOSTED}
-        docker push {{ DOCKER_HOSTED }}/springapp:{{ VERSION }}
+        docker login -u admin -p NEXUS_PASSWORD DOCKER_HOSTED
+        docker push DOCKER_HOSTED/springapp:VERSION 
 
     - name: REMOVE OLD IMAGES FROM SERVER
-      shell: docker rmi -f {{ DOCKER_HOSTED }}/springapp:{{ VERSION }} &> /dev/null
+      shell: docker rmi -f DOCKER_HOSTED/springapp:VERSION &> /dev/null
