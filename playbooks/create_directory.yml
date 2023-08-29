@@ -1,7 +1,8 @@
 ---
 - name: CREATE DIRECTORY & COPY FILES
   hosts: tag_eks_master_server
-  remote_user: root
+  remote_user: ubuntu
+  become: yes
   tasks:
     - name: CREATE DOCKER DIRECTORY
       file:
