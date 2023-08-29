@@ -14,10 +14,12 @@
       copy:
         src: /var/lib/jenkins/workspace/{{ JOB_NAME }}/playbooks/dep_svc.yml
         dest: /opt/playbooks
+      become: true
 
     - name: CHECK FILE
       shell: ls -l /opt/playbooks/
-      register: copy        
+      register: copy
+      become: true        
 
     - name: DEPLOYMENT FILE COPY STATUS      
       debug:
