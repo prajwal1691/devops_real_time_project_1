@@ -6,6 +6,7 @@ pipeline {
     NEXUS_URL = "65.0.110.219:8081"
     DOCKER_HOSTED = "65.0.110.219:8083"
     AWS_DEFAULT_REGION = 'ap-south-1'
+    SSH_KEY_PATH = '/etc/ansible/terraform_ansible.pem'
   }
 
   stages {
@@ -57,6 +58,12 @@ pipeline {
         } 
       }
     }
+
+    stage('Set SSH Key Permissions') {
+            steps {
+                sh 'chmod 600 $SSH_KEY_PATH'
+            }
+        }
     
     stage('COPY JAR & DOCKERFILE') {
             steps {
