@@ -78,10 +78,10 @@ pipeline {
 
     stage('Change Push Tags') {
       steps {
-        sh '''
+        sh """
           sed -i 's/DOCKER_HOSTED/${DOCKER_HOSTED}/g' playbooks/push_dockerhub.yml
           sed -i 's/VERSION/${VERSION}/g' playbooks/push_dockerhub.yml
-        '''
+          """
       }
     }
 
