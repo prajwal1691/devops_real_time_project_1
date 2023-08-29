@@ -11,7 +11,7 @@
 
     - name: LOGIN DOCKERHUB & PUSH IMAGE ON REGISTRY
       shell: |        
-        docker login -u admin -p $nexus_password ${DOCKER_HOSTED}
+        docker login -u admin -p {{ NEXUS_PASSWORD }} ${DOCKER_HOSTED}
         docker push {{ DOCKER_HOSTED }}/springapp:{{ VERSION }}
 
     - name: REMOVE OLD IMAGES FROM SERVER
