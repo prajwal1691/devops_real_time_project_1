@@ -6,7 +6,6 @@ pipeline {
     NEXUS_URL = "65.0.110.219:8081"
     DOCKER_HOSTED = "65.0.110.219:8083"
     AWS_DEFAULT_REGION = 'ap-south-1'
-    NEXUS_PASSWORD = "(credentialsId: 'nexus_pass')"
   }
 
   stages {
@@ -75,19 +74,6 @@ pipeline {
                   steps {
                     ansiblePlaybook credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'aws_ec2.yml', playbook: 'playbooks/create_directory.yml'
                   }
-    }
-
-    stage('MODIFIED PUSH TAG'){
-      steps{
-        script {
-                  def nexusCreds = credentials('nexus_pass')
-                  sh '''
-                   sed -i 's/DOCKER_HOSTED/${DOCKER_HOSTED}/g' playbooks/push_dockerhub.yml
-                   sed -i 's/VERSION/${VERSION}/g' playbooks/push_dockerhub.yml
-                   sed -i 's/NEXUS_PASSWORD/${nexusCreds}/g' playbooks/push_dockerhub.yml
-                   '''
-        }
-      }
     }
 
     stage('PUSH IMAGE ON DOCKERHUB') {  
