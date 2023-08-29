@@ -6,7 +6,6 @@ pipeline {
     NEXUS_URL = "65.0.110.219:8081"
     DOCKER_HOSTED = "65.0.110.219:8083"
     AWS_DEFAULT_REGION = 'ap-south-1'
-    SSH_KEY_PATH = "/var/lib/jenkins/workspace/devops_project/terraform_ansible.pem"
   }
 
   stages {
@@ -66,7 +65,7 @@ pipeline {
                         aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
                         aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
                         aws configure set default.region $AWS_DEFAULT_REGION
-                        ansible-playbook -e ansible_ssh_private_key_file=$SSH_KEY_PATH playbooks/create_directory.yml
+                        ansible-playbook playbooks/create_directory.yml
                     '''
               }
             }

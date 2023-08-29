@@ -1,15 +1,13 @@
 ---
 - name: CREATE DIRECTORY & COPY FILES
   hosts: tag_eks_master_server
-  become: true
-  vars:
-    ansible_ssh_private_key_file: /etc/ansible/terraform_ansible.pem
+  remote_user: ubuntu
   tasks:
     - name: CREATE DOCKER DIRECTORY
       file:
         path: /opt/docker
         state: directory
-        mode: "0755"      
+        mode: "0755"
 
     - name: COPY DOCKERFILE
       copy:
