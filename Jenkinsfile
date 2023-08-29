@@ -17,7 +17,7 @@ pipeline {
 
     stage('CODE CHECKOUT'){
       steps{
-        git 'https://github.com/prajwal1691/devops_real_time_project_1.git'
+        git branch: 'dev', url: 'https://github.com/prajwal1691/devops_real_time_project_1.git'
       }
     }
 
