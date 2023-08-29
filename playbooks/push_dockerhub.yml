@@ -1,6 +1,6 @@
 ---
 - name: IMAGE PUSH
-  hosts: all
+  hosts: tag_eks_master_server
   remote_user: root
   tasks:
     - name: TAG IMAGE WITH BUILD ID & LATEST
