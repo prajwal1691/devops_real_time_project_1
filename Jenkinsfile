@@ -59,21 +59,32 @@ pipeline {
     }
     
     stage('COPY JAR & DOCKERFILE') {
-            steps {
-              withCredentials([string(credentialsId: 'aws_access_key_id', variable: 'AWS_ACCESS_KEY_ID'), string(credentialsId: 'aws_secret_access_key', variable: 'AWS_SECRET_ACCESS_KEY')]) {
-                sh '''
+      steps {
+        withCredentials([string(credentialsId: 'aws_access_key_id', variable: 'AWS_ACCESS_KEY_ID'), string(credentialsId: 'aws_secret_access_key', variable: 'AWS_SECRET_ACCESS_KEY')]) {
+                          sh '''
                         aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
                         aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
                         aws configure set default.region $AWS_DEFAULT_REGION
                 '''
-              }
-            }
         }
+      }
+    }
 
     stage('Install Dependencies') {
+                  steps {
+                    ansiblePlaybook credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'aws_ec2.yml', playbook: 'playbooks/create_directory.yml'
+                  }
+    }
+
+    stage('PUSH IMAGE ON DOCKERHUB') {  
             steps {
-              ansiblePlaybook credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'aws_ec2.yml', playbook: 'playbooks/create_directory.yml'
+              withCredentials([string(credentialsId: 'nexus_pass', variable: 'nexus_password')]) {
+                   ansiblePlaybook credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'aws_ec2.yml', playbook: 'playbooks/push_dockerhub.yml' \
+                    --extra-vars "DOCKER_HOSTED=${DOCKER_HOSTED}" \
+                    --extra-vars "VERSION=${VERSION}" \
+                    --extra-vars "nexus_password=${nexus_password}"
+              }              
             }
-          }
         }
+  }
 }
