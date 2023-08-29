@@ -7,8 +7,7 @@
       file:
         path: /opt/playbooks
         state: directory
-        mode: "0755"
-        become: yes      
+        mode: "0755"     
 
     - name: COPY DEPLOYMENT FILE
       copy:
