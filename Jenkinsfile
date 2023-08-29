@@ -44,7 +44,7 @@ pipeline {
             sh 'mvn sonar:sonar -Dsonar.projectName=$JOB_NAME \
                                 -Dsonar.projectKey=$JOB_NAME \
                                 -Dsonar.host.url=http://13.234.238.173:9000 \
-                                -Dsonar.token=$sonar_token'
+                                -Dsonar.token=$sonar-token'
           }
 
           timeout(time: 1, unit: 'HOURS') {
@@ -55,6 +55,12 @@ pipeline {
           }
         } 
       }
-    } 
+    }
+    
+    stage('COPY JAR & DOCKERFILE') {
+            steps {
+                sh 'ansible-playbook playbooks/create_directory.yml'
+            }
+        } 
   }
 }  
