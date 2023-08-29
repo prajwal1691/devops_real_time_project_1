@@ -5,6 +5,7 @@ pipeline {
     VERSION = "${env.BUILD_ID}"
     NEXUS_URL = "65.0.110.219:8081"
     DOCKER_HOSTED = "65.0.110.219:8083"
+    AWS_DEFAULT_REGION = 'ap-south-1'
   }
 
   stages {
@@ -59,8 +60,13 @@ pipeline {
     
     stage('COPY JAR & DOCKERFILE') {
             steps {
-              withCredentials([string(credentialsId: 'aws_access_key_id', variable: 'aws_access_key_id'), string(credentialsId: 'aws_secret_access_key', variable: 'aws_secret_access_key')]) {
-                sh 'ansible-playbook playbooks/create_directory.yml'
+              withCredentials([string(credentialsId: 'aws_access_key_id', variable: 'AWS_ACCESS_KEY_ID'), string(credentialsId: 'aws_secret_access_key', variable: 'AWS_SECRET_ACCESS_KEY')]) {
+                sh '''
+                        aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+                        aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+                        aws configure set default.region $AWS_DEFAULT_REGION
+                        ansible-playbook playbooks/create_directory.yml
+                    '''
               }
             }
         } 
