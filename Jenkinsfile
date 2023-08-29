@@ -37,5 +37,17 @@ pipeline {
       }
     }
 
+    stage('SONAR SCANNER') {
+            environment {
+            sonar_token = credentials('SONAR_TOKEN')
+            }
+            steps {
+                sh 'mvn sonar:sonar -Dsonar.projectName=$JOB_NAME \
+                    -Dsonar.projectKey=$JOB_NAME \
+                    -Dsonar.host.url=http://13.234.238.173:9000 \
+                    -Dsonar.token=$sonar_token'
+            }
+        } 
+
   }
 }  
