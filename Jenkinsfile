@@ -6,7 +6,6 @@ pipeline {
     NEXUS_URL = "65.0.110.219:8081"
     DOCKER_HOSTED = "65.0.110.219:8083"
     AWS_DEFAULT_REGION = 'ap-south-1'
-    ANSIBLE_HOME = tool name: 'ansible', type: 'Ansible'
   }
 
   stages {
@@ -73,15 +72,8 @@ pipeline {
 
     stage('Install Dependencies') {
             steps {
-                script {
-                    ansiblePlaybook(
-                        playbook: 'playbooks/create_directory.yml',
-                        inventory: '/etc/ansible/aws_ec2.yml',
-                        installation: "${ANSIBLE_HOME}",
-                        colorized: true
-                    )
-                }
+              ansiblePlaybook credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'aws_ec2.yml', playbook: 'create_directory.yml'
             }
+          }
         }
-    } 
 }
