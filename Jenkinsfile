@@ -72,7 +72,7 @@ pipeline {
 
     stage('Install Dependencies') {
             steps {
-              ansiblePlaybook credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'aws_ec2.yml', playbook: 'create_directory.yml'
+              ansiblePlaybook credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'aws_ec2.yml', playbook: 'playbooks/create_directory.yml'
             }
           }
         }
