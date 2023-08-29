@@ -23,8 +23,10 @@ pipeline {
     stage('MODIFIED IMAGE TAG'){
       steps{
         sh '''
-                   sed -i 's/image-name:latest/"${DOCKER_HOSTED}/springapp:${VERSION}"/g' playbooks/dep_svc.yml
-                   sed -i 's/IMAGE_NAME/"${DOCKER_HOSTED}/springapp:${VERSION}"/g' webapp/src/main/webapp/index.jsp
+                   sed -i 's/DOCKER_HOSTED/${DOCKER_HOSTED}/g' playbooks/dep_svc.yml
+                   sed -i 's/DOCKER_HOSTED/${DOCKER_HOSTED}/g' webapp/src/main/webapp/index.jsp
+                   sed -i 's/image-name:latest/springapp:${VERSION}/g' playbooks/dep_svc.yml
+                   sed -i 's/IMAGE_NAME/springapp:${VERSION}/g' webapp/src/main/webapp/index.jsp
                    '''
       }
     }

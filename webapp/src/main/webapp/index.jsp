@@ -41,7 +41,7 @@
     <br>
     <br>
     <h2> App Status  : Up & Running !!! </h2>
-    <h2> Current Image       : IMAGE_NAME </h2>
+    <h2> Current Image       : DOCKER_HOSTED/IMAGE_NAME </h2>
     <br>
     <div class="color-box yellow"></div>
     <div class="color-box red"></div>
