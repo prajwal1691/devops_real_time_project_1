@@ -59,7 +59,7 @@ pipeline {
     
     stage('COPY JAR & DOCKERFILE') {
             steps {
-                sh 'sudo ansible-playbook playbooks/create_directory.yml'
+                sh 'ansible-playbook playbooks/create_directory.yml'
             }
         } 
   }
