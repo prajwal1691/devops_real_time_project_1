@@ -41,11 +41,11 @@ metadata:
   labels:
     app: my-app
 spec:
-  type: NodePort
+  type: LoadBalancer  # Change the service type to LoadBalancer
   selector:
     app: my-app
   ports:
   - name: http
     port: 80
     targetPort: 8080
-    nodePort: 30000
+
