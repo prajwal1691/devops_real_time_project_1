@@ -74,7 +74,7 @@ pipeline {
 
     stage('Install Dependencies') {
                   steps {
-                    ansiblePlaybook credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'aws_ec2.yml', playbook: 'playbooks/create_directory.yml'
+                    ansiblePlaybook credentialsId: 'ssh-key', disableHostKeyChecking: true, installation: 'Ansible', inventory: 'aws_ec2.yml', playbook: 'playbooks/create_directory.yml'
                   }
     }
 
@@ -90,7 +90,7 @@ pipeline {
 
     stage('PUSH IMAGE ON DOCKERHUB') {  
             steps {
-                  ansiblePlaybook credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'aws_ec2.yml', playbook: 'playbooks/push_dockerhub.yml'
+                  ansiblePlaybook credentialsId: 'ssh-key', disableHostKeyChecking: true, installation: 'Ansible', inventory: 'aws_ec2.yml', playbook: 'playbooks/push_dockerhub.yml'
             }
         }
 
@@ -104,7 +104,7 @@ pipeline {
 
     stage('DEPLOYMENT ON EKS') {
             steps {
-                ansiblePlaybook credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'aws_ec2.yml', playbook: 'playbooks/create_pod_on_eks.yml'
+                ansiblePlaybook credentialsId: 'ssh-key', disableHostKeyChecking: true, installation: 'Ansible', inventory: 'aws_ec2.yml', playbook: 'playbooks/create_pod_on_eks.yml'
             }            
         } 
   }
