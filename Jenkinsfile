@@ -3,8 +3,9 @@ pipeline {
   environment {
     PATH = "$PATH:/opt/apache-maven-3.9.4/bin"
     VERSION = "${env.BUILD_ID}"
-    NEXUS_URL = "65.0.110.219:8081"
-    DOCKER_HOSTED = "65.0.110.219:8083"
+    NEXUS_URL = "3.7.73.59:8081"
+    DOCKER_HOSTED = "3.7.73.59:8083"
+    DOCKER_REPO = "3.7.73.59:8081/repository/docker-hosted"
     AWS_DEFAULT_REGION = 'ap-south-1'
     NEXUS_PASSWORD = "${nexus_pass}"
   }
@@ -25,8 +26,8 @@ pipeline {
     stage('MODIFIED IMAGE TAG'){
       steps{
         sh """
-                   sed -i 's/DOCKER_HOSTED/${DOCKER_HOSTED}/g' playbooks/dep_svc.yml
-                   sed -i 's/DOCKER_HOSTED/${DOCKER_HOSTED}/g' webapp/src/main/webapp/index.jsp
+                   sed -i 's/DOCKER_REPO/${DOCKER_REPO}/g' playbooks/dep_svc.yml
+                   sed -i 's/DOCKER_REPO/${DOCKER_REPO}/g' webapp/src/main/webapp/index.jsp
                    sed -i 's/image-name:latest/springapp:${VERSION}/g' playbooks/dep_svc.yml
                    sed -i 's/IMAGE_NAME/springapp:${VERSION}/g' webapp/src/main/webapp/index.jsp
                    """
@@ -45,7 +46,7 @@ pipeline {
           withSonarQubeEnv(credentialsId: 'sonar-token') {
             sh 'mvn sonar:sonar -Dsonar.projectName=$JOB_NAME \
                                 -Dsonar.projectKey=$JOB_NAME \
-                                -Dsonar.host.url=http://13.234.238.173:9000 \
+                                -Dsonar.host.url=http://13.233.111.221:9000 \
                                 -Dsonar.token=$sonar-token'
           }
 
