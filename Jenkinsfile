@@ -5,9 +5,8 @@ pipeline {
     VERSION = "${env.BUILD_ID}"
     NEXUS_URL = "3.7.73.59:8081"
     DOCKER_HOSTED = "3.7.73.59:8083"
-    DOCKER_REPO = "3.7.73.59:8081"
     AWS_DEFAULT_REGION = "ap-south-1"
-    NEXUS_PASSWORD = "Prajwal@91"
+    NEXUS_PASSWORD = Prajwal@91"
   }
 
   stages {
@@ -26,9 +25,7 @@ pipeline {
     stage('MODIFIED IMAGE TAG'){
       steps{
         sh """
-
-                   sed -i 's/DOCKER_REPO/${DOCKER_REPO}/g' webapp/src/main/webapp/index.jsp
-                   sed -i 's/image-name:latest/springapp:${VERSION}/g' playbooks/dep_svc.yml
+                   sed -i 's/DOCKER_HOSTED/${DOCKER_HOSTED}/g' webapp/src/main/webapp/index.jsp
                    sed -i 's/IMAGE_NAME/springapp:${VERSION}/g' webapp/src/main/webapp/index.jsp
                    """
       }

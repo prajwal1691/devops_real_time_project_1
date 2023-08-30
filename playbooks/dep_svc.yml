@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: my-app
-        image: image-name:latest        
+        image: prajwal1691/springapp:latest        
         ports:
         - containerPort: 8080        
         readinessProbe:
