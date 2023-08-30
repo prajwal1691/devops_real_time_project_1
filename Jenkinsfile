@@ -6,8 +6,8 @@ pipeline {
     NEXUS_URL = "3.7.73.59:8081"
     DOCKER_HOSTED = "3.7.73.59:8083"
     DOCKER_REPO = "3.7.73.59:8081"
-    AWS_DEFAULT_REGION = 'ap-south-1'
-    NEXUS_PASSWORD = "${nexus_pass}"
+    AWS_DEFAULT_REGION = "ap-south-1"
+    NEXUS_PASSWORD = "Prajwal@91"
   }
 
   stages {
