@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: my-app
-        image: DOCKER_REPO/repository/docker-hosted/image-name:latest        
+        image: image-name:latest        
         ports:
         - containerPort: 8080        
         readinessProbe:
